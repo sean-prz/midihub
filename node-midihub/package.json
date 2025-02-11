@@ -7,11 +7,11 @@
     "build": "tsc",
     "start": "npm run build && node dist/index.js"
   },
-  "dependencies": {
-    "webmidi": "^3.1.12"
-  },
   "devDependencies": {
     "typescript": "^5.5.3"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "easymidi": "^3.1.0"
+  }
 }

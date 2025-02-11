@@ -4,7 +4,7 @@ export class MidiConstants {
         OFF: 12 / 127,
         RED: 15 / 127,
         GREEN: 60 / 127,
-        YELLOW: 62 / 127
+        YELLOW: 31 / 127
     };
 }
 export const COLORS = MidiConstants.COLORS;
