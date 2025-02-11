@@ -1,5 +1,4 @@
-
-export class LedStatus {
+class LedStatus {
     public LED_STATUS: {[key: number]: boolean} = {};
     constructor() {
         for (let i = 0; i < 100; i++) {
@@ -7,3 +6,5 @@ export class LedStatus {
         }
     }
 }
+
+export const LED_STATUS = new LedStatus().LED_STATUS;

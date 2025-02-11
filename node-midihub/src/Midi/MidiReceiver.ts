@@ -1,17 +1,14 @@
 import {MidiSender} from "./MidiSender";
 import {ControlChangeMessageEvent, NoteMessageEvent} from "webmidi";
-import {COLORS} from "./MidiConstants";
-import {LedStatus} from "./LedStatus";
+import {BOTTOM_ROW, COLORS} from "./MidiConstants";
 
 
 export class MidiReceiver {
 
     private midiSender : MidiSender;
-    private readonly LED_STATUS: {[key: number]: boolean} = {};
 
     constructor(midiSender: MidiSender) {
         this.midiSender = midiSender;
-        this.LED_STATUS = new LedStatus().LED_STATUS;
     }
 
     /**
@@ -27,10 +24,10 @@ export class MidiReceiver {
      * @param e
      */
     public handleNoteOn(e: NoteMessageEvent) {
-        this.midiSender.setLed(
-            e.note.number,
-            this.LED_STATUS[e.note.number] ? COLORS.RED : COLORS.GREEN
-        );
-        this.LED_STATUS[e.note.number] = !this.LED_STATUS[e.note.number];
+        let note = e.note.number;
+        // Bottom row is for task
+        if (BOTTOM_ROW.includes(note)) {
+            this.midiSender.toggleTaskLed(note);
+        }
     }
 }

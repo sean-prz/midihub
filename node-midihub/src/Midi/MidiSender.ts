@@ -1,6 +1,7 @@
 import {Output, WebMidi} from "webmidi";
 import {MidiHandler} from "./MidiHandler";
-import {MidiConstants, COLORS} from "./MidiConstants";
+import {MidiConstants, COLORS, BOTTOM_ROW} from "./MidiConstants";
+import {LED_STATUS} from "./LedStatus";
 
 export class MidiSender {
     private out: Output;
@@ -15,8 +16,13 @@ export class MidiSender {
      * @private
      */
     private resetLed(color: number) {
-        MidiConstants.NOTE_ARRAY.forEach(note => {
-          this.setLed(note, color);
+
+        for (let i = 0; i < 128; i++) {
+            this.setLed(i, COLORS.OFF);
+        }
+
+        BOTTOM_ROW.forEach(note => {
+            this.setLed(note, color);
         })
     }
 
@@ -28,6 +34,13 @@ export class MidiSender {
      */
     public setLed(note : number, color: number) {
         this.out.channels[1].playNote(note, {attack: color})
+    }
+    public toggleTaskLed(note: number) {
+        this.setLed(
+            note ,
+            LED_STATUS[note] ? COLORS.RED : COLORS.GREEN
+        );
+        LED_STATUS[note] = !LED_STATUS[note];
     }
 }
 
