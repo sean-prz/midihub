@@ -2,3 +2,4 @@ node-midihub/.DS_Store
 .DS_Store
 node-midihub/.idea
 node-midihub/dist
+node_modules
