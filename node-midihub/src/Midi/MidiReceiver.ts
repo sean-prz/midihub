@@ -22,6 +22,17 @@ export class MidiReceiver {
         let note = e.controller;
         if (note == 84) {
             this.hueController.changeBrightness(2, e.value);
+        } else if (note == 83) {
+            console.log("Changing brightness");
+            this.hueController.changeBrightness(3, e.value);
+        }
+        // 19, 35, 55
+        else if (note == 19) {
+            this.hueController.changeHue(3, {red: e.value})
+        } else if (note == 35) {
+            this.hueController.changeHue(3, {green: e.value})
+        } else if (note == 55) {
+            this.hueController.changeHue(3, {blue: e.value})
         }
     }
 
@@ -40,6 +51,13 @@ export class MidiReceiver {
         if ( note == 60) {
            this.hueController.switchLight(2)
             this.midiSender.toggleLightLed(note)
+        }
+        else if (note == 59) {
+            this.hueController.switchLight(3)
+            this.midiSender.toggleLightLed(note)
+        }
+        else if (note == 58) {
+            this.hueController.hueRequest(3, {xy: [0.43, 0.40]})
         }
     }
 }
