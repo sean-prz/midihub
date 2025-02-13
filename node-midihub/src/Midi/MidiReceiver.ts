@@ -5,7 +5,7 @@ import {ControlChange, Note} from "easymidi";
 
 
 export class MidiReceiver {
-
+    private nightMode: boolean = false;
     private midiSender : MidiSender;
     private hueController: HueController;
     constructor(midiSender: MidiSender) {
@@ -58,6 +58,9 @@ export class MidiReceiver {
         }
         else if (note == 58) {
             this.hueController.hueRequest(3, {xy: [0.43, 0.40]})
+        } else if (note == 41) {
+            this.nightMode = !this.nightMode;
+            this.nightMode ? this.midiSender.nightMode() :  this.midiSender.resetLed()
         }
     }
 }

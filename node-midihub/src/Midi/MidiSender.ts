@@ -7,7 +7,7 @@ export class MidiSender {
     private out: Output;
     constructor(out: Output) {
         this.out = out;
-        this.resetLed(COLORS.RED);
+        this.resetLed();
     }
 
     /**
@@ -15,16 +15,22 @@ export class MidiSender {
      * @param color
      * @private
      */
-    private resetLed(color: number) {
+    public resetLed() {
 
         for (let i = 0; i < 128; i++) {
             this.setLed(i, COLORS.OFF);
         }
 
         BOTTOM_ROW.forEach(note => {
-            this.setLed(note, color);
+            this.setLed(note, COLORS.RED);
         })
     }
+    public nightMode() {
+        for (let i = 0; i < 128; i++) {
+            this.setLed(i, COLORS.OFF);
+        }
+    }
+
 
     /**
      * Set the LED of a button to a specific color
