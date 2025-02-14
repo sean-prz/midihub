@@ -37,18 +37,18 @@ export class MidiReceiver {
     }
 
     /**
-     * Handle all note on event and dispatch them
-     * @param e
+     * Handle a button press event on the launch control and dispatch it.
+     * @param n - The note pressed
      */
-    public handleNoteOn(e: Note) {
-        console.log(e.note);
-        let note = e.note
+    public handleNoteOn(n: Note) {
+        console.log(n.note);
+        let note = n.note
         // Bottom row is for task
         if (BOTTOM_ROW.includes(note)) {
             this.midiSender.toggleTaskLed(note);
         }
         // Last 2 Buttons of top row are for light on/off
-        if ( note == 60) {
+        if (note == 60) {
            this.hueController.switchLight(2)
             this.midiSender.toggleLightLed(note)
         }
@@ -60,7 +60,7 @@ export class MidiReceiver {
             this.hueController.hueRequest(3, {xy: [0.43, 0.40]})
         } else if (note == 41) {
             this.nightMode = !this.nightMode;
-            this.nightMode ? this.midiSender.nightMode() :  this.midiSender.resetLed()
+            this.nightMode ? this.midiSender.nightMode() :  this.midiSender.restoreLed()
         }
     }
 }

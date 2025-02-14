@@ -10,3 +10,4 @@ export class MidiConstants {
 export const COLORS = MidiConstants.COLORS;
 export const TOP_ROW = [41, 42, 43, 44, 57, 58, 59, 60];
 export const BOTTOM_ROW = [73, 74, 75, 76, 89, 90, 91, 92];
+export const LIGHTS_LED = [59, 60]
